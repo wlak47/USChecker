@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self';">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WellaUSChecker</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="startupIntro" class="startup-intro" aria-hidden="true">
+  <div class="intro-glow intro-glow-one"></div><div class="intro-glow intro-glow-two"></div>
+  <div class="intro-content">
+    <div class="intro-mark">W<span>✦</span></div>
+    <div class="intro-wordmark">WellaUSChecker</div>
+    <div class="intro-tagline">YOUR NEXT HANDLE STARTS HERE</div>
+    <div class="intro-loader"><i></i></div>
+    <div class="intro-status">INITIALIZING YOUR WORKSPACE</div>
+  </div>
+  <button id="skipIntro" class="intro-skip">SKIP INTRO ↗</button>
+</div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">W<span>✦</span></div><div><b class="brand-name">Wella<span>USChecker</span></b><small>USERNAME INTELLIGENCE</small></div></div>
+    <div class="side-label">WORKSPACE</div>
+    <div class="nav-item active" id="scannerNav"><span class="nav-ico">◈</span> Username scanner <span class="nav-dot"></span></div>
+    <div class="nav-item" id="availableNav"><span class="nav-ico">✓</span> Verified available <span class="nav-count" id="savedCount">0</span></div>
+    <div class="nav-item" id="folderNav"><span class="nav-ico">▤</span> Results folder</div>
+    <div class="side-bottom">
+      <div class="mini-card"><div class="pulse"></div><div><b>Scanner engine</b><small>Ready for a new session</small></div></div>
+      <div class="side-foot">WELLAUSCHECKER <span>V1</span><br><small>Built for precision, not guesswork.</small></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><div class="eyebrow">SOCIAL IDENTITY / DISCOVERY</div><h1>Username <em>Scanner</em></h1></div>
+      <div class="top-right"><div class="live-indicator"><i></i> LOCAL ENGINE READY</div><div class="avatar">HS</div></div>
+    </header>
+
+    <div id="scannerView">
+    <section class="welcome">
+      <div class="welcome-copy"><div class="eyebrow pink">THE HANDLE HUNT STARTS HERE</div>
+        <h2>Find your next<br><span>signature handle.</span></h2>
+        <p>Explore short names, check public profile signals, and keep every result organized in one place.</p>
+      </div>
+      <div class="orbit-art" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div><div class="orb-core">H<span>✦</span></div><div class="spark s1">✦</div><div class="spark s2">✧</div><div class="spark s3">✦</div></div>
+      <div class="welcome-tag">PINK<br>PROTOCOL <span>02</span></div>
+    </section>
+
+    <section class="config panel">
+      <div class="section-head"><div><span class="section-kicker">01 / CONFIGURE</span><h3>Build your scan</h3></div><div class="subtle">Choose every setting before launch</div></div>
+      <div class="config-grid">
+        <label><span>PLATFORM</span><div class="select-wrap"><select id="platform"><option value="" selected disabled>Select platform</option><option>TikTok</option><option>Instagram</option><option>X</option><option>Twitch</option><option>Threads</option><option>YouTube</option></select></div></label>
+        <label><span>USERNAME LENGTH</span><div class="select-wrap"><select id="length"><option value="" selected disabled>Select length</option><option value="2">2 characters</option><option value="3">3 characters</option><option value="4">4 characters</option><option value="5">5 characters</option></select></div></label>
+        <label><span>CHARACTER SET</span><div class="select-wrap"><select id="charset"><option value="" selected disabled>Select character set</option><option value="letters">Letters · a–z</option><option value="alnum">Letters + numbers</option></select></div></label>
+        <label><span>SCAN QUANTITY</span><input id="amount" type="number" min="1" max="5000" placeholder="Enter amount"></label>
+      </div>
+      <div class="config-bottom"><div class="hint"><span>✧</span> Slower scans help reduce rate limits. Duplicate names are automatically avoided.</div>
+        <div class="button-row"><button class="btn-quiet" id="stop" disabled>STOP SCAN</button><button class="btn-primary" id="start"><span>✦</span> START CHECKING <b>↗</b></button></div>
+      </div>
+      <div class="validation" id="validation" aria-live="polite"></div>
+    </section>
+
+    <section class="overview">
+      <div class="section-head overview-head"><div><span class="section-kicker">02 / LIVE OVERVIEW</span><h3>Scan intelligence</h3></div><div class="session-state"><i></i><span id="sessionState">AWAITING FIRST SCAN</span></div></div>
+      <div class="metrics">
+        <div class="metric panel"><div class="metric-top"><span>TOTAL CHECKED</span><span class="metric-icon">⌁</span></div><strong id="count">—</strong><small>Profiles processed this session</small><div class="metric-line"><i style="width:0%"></i></div></div>
+        <div class="metric panel"><div class="metric-top"><span>CONFIRMED AVAILABLE</span><span class="metric-icon green-icon">✓</span></div><strong id="available" class="green">—</strong><small><b id="availablePct">0%</b> of checked usernames</small><div class="metric-line green-line"><i id="availableBar" style="width:0%"></i></div></div>
+        <div class="metric panel"><div class="metric-top"><span>LIKELY TAKEN</span><span class="metric-icon red-icon">×</span></div><strong id="taken" class="red">—</strong><small><b id="takenPct">0%</b> of checked usernames</small><div class="metric-line red-line"><i id="takenBar" style="width:0%"></i></div></div>
+        <div class="metric panel"><div class="metric-top"><span>NEEDS REVIEW</span><span class="metric-icon gold-icon">◇</span></div><strong id="review" class="gold">—</strong><small><b id="reviewPct">0%</b> candidates / unknown</small><div class="metric-line gold-line"><i id="reviewBar" style="width:0%"></i></div></div>
+      </div>
+    </section>
+
+    <section class="results panel">
+      <div class="results-head"><div><span class="section-kicker">03 / ACTIVITY STREAM</span><h3>Scan results <span class="result-count" id="resultCount">0 RECORDS</span></h3></div>
+        <div class="result-actions"><button id="confirm" class="btn-mini confirm-btn" disabled>✓ CONFIRM AVAILABLE</button><button id="markTaken" class="btn-mini" disabled>MARK TAKEN</button><button id="export" class="btn-mini" disabled>↓ EXPORT CSV</button></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-meta"><span id="status">Your scan results will appear here.</span><b id="progressLabel">0%</b></div><div class="progress-track"><div id="progressBar"></div></div></div>
+      <div class="table-wrap"><table><thead><tr><th>USERNAME</th><th>CLASSIFICATION</th><th>DETAILS</th><th>PROFILE</th></tr></thead><tbody id="rows"><tr class="empty-row"><td colspan="4"><div class="empty-state"><div class="empty-icon">✧</div><b>No scan data yet</b><span>Configure your scan above to discover available-looking handles.</span></div></td></tr></tbody></table></div>
+      <div class="results-foot"><div class="legend"><span><i class="dot dot-green"></i>Confirmed</span><span><i class="dot dot-red"></i>Likely taken</span><span><i class="dot dot-gold"></i>Candidate</span><span><i class="dot dot-muted"></i>Unknown</span></div><button id="folderBtn" class="folder-btn">DOWNLOAD RESULTS ↗</button></div>
+    </section>
+    </div>
+    <section id="availableView" class="saved-view" hidden>
+      <div class="saved-hero">
+        <div><div class="eyebrow pink">YOUR VERIFIED COLLECTION</div><h2>Available <em>handles.</em></h2><p>Only usernames you personally confirmed inside the platform's official username settings appear here.</p></div>
+        <div class="saved-total"><strong id="savedTotal">0</strong><span>VERIFIED HANDLES</span></div>
+      </div>
+      <div class="saved-toolbar panel">
+        <label class="saved-filter-label">FILTER BY PLATFORM
+          <select id="savedPlatform"><option value="all">All platforms</option><option>TikTok</option><option>Instagram</option><option>X</option><option>Twitch</option><option>Threads</option><option>YouTube</option></select>
+        </label>
+        <input id="savedSearch" class="saved-search" type="search" placeholder="Search username…">
+        <button id="savedExport" class="btn-mini">↓ EXPORT LIST</button>
+      </div>
+      <div id="savedGroups" class="saved-groups"></div>
+      <div class="saved-note">✦ Verified means manually confirmed by you in the platform's own username settings. A missing public profile is not enough.</div>
+    </section>
+    <footer><span>WELLAUSCHECKER / V1</span><span class="footer-note">Public profile checks are signals, not a platform availability guarantee.</span><span class="made-by">Made with <b>🩷</b> by <strong>Wella</strong></span></footer>
+  </main>
+</div>
+<script src="startup.js"></script>
+<script src="web-bridge.js"></script>
+<script src="renderer.js"></script>
+</body></html>
